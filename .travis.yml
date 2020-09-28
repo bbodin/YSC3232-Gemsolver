@@ -5,5 +5,8 @@ android:
     - build-tools-30.0.1
     - android-29
     - extra
+  licenses:
+    - android-sdk-license-.+
+    - '.+'
 script:
     - ./gradlew test
