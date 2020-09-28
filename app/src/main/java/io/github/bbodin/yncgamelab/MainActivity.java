@@ -1,7 +1,5 @@
 package io.github.bbodin.yncgamelab;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.util.Log;
 import android.view.SurfaceView;
@@ -9,14 +7,15 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import io.github.bbodin.yncgamelab.io.InputHandler;
 import io.github.bbodin.yncgamelab.io.InputListener;
 import io.github.bbodin.yncgamelab.models.CellStatus;
 import io.github.bbodin.yncgamelab.models.gems.ChangeAction;
 import io.github.bbodin.yncgamelab.models.gems.GemGrid;
-import io.github.bbodin.yncgamelab.rendering.GridRenderer;
 import io.github.bbodin.yncgamelab.models.gems.MoveAction;
-import io.github.bbodin.yncgamelab.utils.Int2;
+import io.github.bbodin.yncgamelab.rendering.GridRenderer;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 

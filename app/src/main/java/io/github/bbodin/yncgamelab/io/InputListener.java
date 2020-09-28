@@ -1,8 +1,9 @@
 package io.github.bbodin.yncgamelab.io;
 
-import io.github.bbodin.yncgamelab.utils.Float2;
 import android.view.MotionEvent;
 import android.view.View;
+
+import io.github.bbodin.yncgamelab.utils.Float2;
 
 /**
  * The InputListener object can be add as a Listener for any View object.
