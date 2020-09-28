@@ -1,12 +1,16 @@
 language: android
 
+jdk:
+  - oraclejdk8
+
 android:
   components:
+    - tools
+    - platform-tools
+    - tools
     - build-tools-30.0.1
     - android-29
     - extra
-  licenses:
-    - android-sdk-license-.+
-    - '.+'
+
 script:
-    - ./gradlew test
+    - ./gradlew test 
