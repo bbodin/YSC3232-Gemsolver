@@ -14,10 +14,11 @@ import io.github.bbodin.yncgamelab.io.InputListener;
 import io.github.bbodin.yncgamelab.models.CellStatus;
 import io.github.bbodin.yncgamelab.models.gems.ChangeAction;
 import io.github.bbodin.yncgamelab.models.gems.GemGrid;
+import io.github.bbodin.yncgamelab.models.gems.GemSolver;
 import io.github.bbodin.yncgamelab.models.gems.MoveAction;
 import io.github.bbodin.yncgamelab.rendering.GridRenderer;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class GameActivity extends AppCompatActivity implements View.OnClickListener {
 
     private  final static String TAG = "MainActivity";
     GemGrid     _grid         = null;
@@ -66,6 +67,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
         Log.d(TAG, "onCreate Finished");
+
+        ((GameLabApplication) this.getApplication()).last_score;
 
     }
 

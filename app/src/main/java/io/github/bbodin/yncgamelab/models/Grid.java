@@ -85,7 +85,7 @@ public class Grid {
     }
 
     // Callback when the grid changes
-    public interface Callback {void gridChanged ( Grid grid ) ; }
+    public interface Callback {void gridChanged ( Grid grid ) ; void gameEnded ( int score ) ; }
     public void setCallBack(Callback c) { callback = c; }
     public void addCallBack (Callback c )  { this.callback = c; }
     private Callback callback = null;
