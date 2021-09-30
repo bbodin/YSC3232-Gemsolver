@@ -14,6 +14,7 @@ import io.github.bbodin.yncgamelab.io.InputListener;
 import io.github.bbodin.yncgamelab.models.CellStatus;
 import io.github.bbodin.yncgamelab.models.gems.ChangeAction;
 import io.github.bbodin.yncgamelab.models.gems.GemGrid;
+import io.github.bbodin.yncgamelab.models.gems.GemSolver;
 import io.github.bbodin.yncgamelab.models.gems.MoveAction;
 import io.github.bbodin.yncgamelab.rendering.GridRenderer;
 

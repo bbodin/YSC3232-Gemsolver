@@ -1,5 +1,4 @@
-package io.github.bbodin.yncgamelab;
-
+package io.github.bbodin.yncgamelab.models.gems;
 
 import io.github.bbodin.yncgamelab.models.gems.GemGrid;
 import io.github.bbodin.yncgamelab.utils.Int2;

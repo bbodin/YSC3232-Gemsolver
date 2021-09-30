@@ -25,6 +25,7 @@ public class GridTest {
     public void before() {
         this.grid = new Grid(w,h);
     }
+
     @Test
     public void gridSize_test() {
         assertEquals(this.grid.getW(),w );

@@ -38,9 +38,6 @@ public class InputListener implements View.OnTouchListener {
     public boolean onTouch(View view, MotionEvent motionEvent) {
 
         Float2 dim     = new Float2(view.getWidth(), view.getHeight());
-        Float2 current = new Float2(motionEvent.getX(), motionEvent.getY());
-        Float2 curperc = current.div(dim);
-
 
         switch(motionEvent.getAction())
         {
