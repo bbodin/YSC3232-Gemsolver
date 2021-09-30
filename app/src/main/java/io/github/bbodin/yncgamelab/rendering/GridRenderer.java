@@ -1,7 +1,9 @@
 package io.github.bbodin.yncgamelab.rendering;
 
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Rect;
 import android.util.Log;
 import android.view.SurfaceHolder;
 
@@ -16,7 +18,7 @@ public class GridRenderer implements Grid.Callback, SurfaceHolder.Callback  {
     private Grid grid;
     private SurfaceHolder holder;
 
-    public GridRenderer ( Grid g ) {
+    public GridRenderer (Grid g) {
         this.grid = g;
         this.grid.setCallBack(this);
     }
@@ -51,6 +53,50 @@ public class GridRenderer implements Grid.Callback, SurfaceHolder.Callback  {
         }
     }
 
+    private void drawCell(Canvas canvas, Rect bounds, CellStatus status) {
+
+        int gem_color = 0;
+
+        switch (status) {
+            case YELLOW:
+                gem_color = Color.argb(255, 255, 255, 179);
+                break;
+
+            case RED:
+                gem_color = Color.argb(255,251, 128, 114);
+                break;
+
+            case BLUE:
+                gem_color = Color.argb(255, 128, 177, 211);
+                break;
+            case ORANGE:
+                gem_color = Color.argb(255, 253, 180, 98);
+                break;
+
+            case GREEN:
+                gem_color = Color.argb(255, 179, 222, 105);
+                break;
+            case PINK:
+                gem_color = Color.argb(255, 252, 205, 229);
+                break;
+
+            case UNKNOWN:
+            case EMPTY:
+            default:
+                gem_color = Color.argb(0, 0, 0, 0);
+        }
+
+
+        // Draw the color background
+        Paint  gemPaint = new Paint();
+        gemPaint.setColor(gem_color);
+        gemPaint.setStyle(Paint.Style.FILL_AND_STROKE);
+        gemPaint.setStrokeWidth(5);
+        canvas.drawRect(bounds, gemPaint);
+
+
+    }
+
     private void drawGrid(Grid grid, Canvas canvas) {
         Log.d(TAG, "start drawGrid");
 
@@ -81,50 +127,17 @@ public class GridRenderer implements Grid.Callback, SurfaceHolder.Callback  {
         for (int nx = 0; nx < xcount; nx++) {
             for (int ny = 0; ny < ycount; ny++) {
 
-                float xpos1 = nx * canvas.getWidth() / xcount ;
-                float ypos1 = ny * canvas.getHeight() / ycount ;
-                float xpos2 = (nx +1 ) * canvas.getWidth() / xcount ;
-                float ypos2 = (ny+1 ) * canvas.getHeight() / ycount ;
+                int xpos1 = nx * canvas.getWidth() / xcount ;
+                int ypos1 = ny * canvas.getHeight() / ycount ;
+                int xpos2 = (nx +1 ) * canvas.getWidth() / xcount ;
+                int ypos2 = (ny+1 ) * canvas.getHeight() / ycount ;
+
+                Rect bounds = new Rect (xpos1, canvas.getHeight() - ypos1, xpos2, canvas.getHeight() - ypos2);
 
                 Int2 pos = new Int2(nx,ny);
                 CellStatus status = grid.getCellStatus(pos);
+                drawCell(canvas, bounds, status);
 
-
-                Paint  gemPaint = new Paint();
-                gemPaint.setStyle(Paint.Style.FILL_AND_STROKE);
-                gemPaint.setStrokeWidth(5);
-
-
-                switch (status) {
-                    case YELLOW:
-                        gemPaint.setARGB(255, 255, 255, 179);
-                        break;
-
-                    case RED:
-                        gemPaint.setARGB(255,251, 128, 114);
-                        break;
-
-                    case BLUE:
-                        gemPaint.setARGB(255, 1128, 177, 211);
-                        break;
-                    case ORANGE:
-                        gemPaint.setARGB(255, 253, 180, 98);
-                        break;
-
-                    case GREEN:
-                        gemPaint.setARGB(255, 179, 222, 105);
-                        break;
-                    case PINK:
-                        gemPaint.setARGB(255, 252, 205, 229);
-                        break;
-
-                    case UNKNOWN:
-                    case EMPTY:
-                    default:
-                        gemPaint.setARGB(0, 0, 0, 0);
-                        break;
-                }
-                canvas.drawRect(xpos1, canvas.getHeight() - ypos1, xpos2, canvas.getHeight() - ypos2, gemPaint);
             }
         }
 
