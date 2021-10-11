@@ -1,12 +1,18 @@
 package io.github.bbodin.yncgamelab.rendering;
 
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffColorFilter;
 import android.graphics.Rect;
 import android.util.Log;
 import android.view.SurfaceHolder;
 
+import io.github.bbodin.yncgamelab.R;
 import io.github.bbodin.yncgamelab.models.CellStatus;
 import io.github.bbodin.yncgamelab.models.Grid;
 import io.github.bbodin.yncgamelab.utils.Int2;
@@ -17,10 +23,18 @@ public class GridRenderer implements Grid.Callback, SurfaceHolder.Callback  {
 
     private Grid grid;
     private SurfaceHolder holder;
+    private Bitmap gem_bitmap;
 
-    public GridRenderer (Grid g) {
+    /**
+     * The GridRenderer is responsible to draw the Universe on the screen
+     * It requires the context in order to collect bitmaps
+     * @param g
+     * @param context
+     */
+    public GridRenderer (Grid g, Resources context) {
         this.grid = g;
         this.grid.setCallBack(this);
+        this.gem_bitmap = BitmapFactory.decodeResource(context, R.mipmap.gem);
     }
 
     @Override
@@ -87,13 +101,24 @@ public class GridRenderer implements Grid.Callback, SurfaceHolder.Callback  {
         }
 
 
-        // Draw the color background
-        Paint  gemPaint = new Paint();
-        gemPaint.setColor(gem_color);
-        gemPaint.setStyle(Paint.Style.FILL_AND_STROKE);
-        gemPaint.setStrokeWidth(5);
-        canvas.drawRect(bounds, gemPaint);
 
+        // // Draw the color background
+        // Paint  gemPaint = new Paint();
+        // gemPaint.setColor(gem_color);
+        // gemPaint.setStyle(Paint.Style.FILL_AND_STROKE);
+        // gemPaint.setStrokeWidth(5);
+        // canvas.drawRect(bounds, gemPaint);
+
+        // This is a filter to merge the bitmap and the background color
+        Paint paint = new Paint();
+        paint.setColorFilter(new PorterDuffColorFilter(gem_color, PorterDuff.Mode.ADD));
+
+        // Rescale the bitmap: This could be done once to avoid useless computation
+        // but it is generally move convenient to do it online expect if the number of object become too important.
+        Bitmap scaled_bmp = Bitmap.createScaledBitmap(this.gem_bitmap, bounds.width(), bounds.height(), true);
+
+        // Draw the bitmap
+        canvas.drawBitmap(scaled_bmp, bounds.left, bounds.bottom, paint);
 
     }
 

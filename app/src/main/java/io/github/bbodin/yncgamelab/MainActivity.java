@@ -49,7 +49,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         _solveButton = (Button) findViewById(R.id.solveButton);
         _solveButton.setOnClickListener(this);
 
-        GridRenderer gridRenderer = new GridRenderer(_grid);
+        // Not ideal, We need to pass the resources access to the renderer.
+        //
+        GridRenderer gridRenderer = new GridRenderer(_grid, getResources());
         _grid.addCallBack(gridRenderer);
 
         _sv =  (SurfaceView)findViewById(R.id.surfaceView);
